@@ -1,9 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { deleteCar, getCarById, updateCar } from "@/lib/db";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+// Define the correct type for context
+interface Params {
+  params: { id: string };
+}
+
+export async function GET(req: NextRequest, context: Params) {
   try {
-    const car = await getCarById(params.id);
+    const { id } = context.params;
+    const car = await getCarById(id);
 
     if (!car) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
@@ -16,8 +22,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, context: Params) {
   try {
+    const { id } = context.params;
     const data = await req.json();
 
     // Update the car with the data
@@ -34,7 +41,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       updatedAt: new Date(),
     };
 
-    const result = await updateCar(params.id, car);
+    const result = await updateCar(id, car);
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
@@ -42,7 +49,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json({
       success: true,
-      car: { ...car, id: params.id },
+      car: { ...car, id },
     });
   } catch (error) {
     console.error("Error updating car:", error);
@@ -50,9 +57,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, context: Params) {
   try {
-    const result = await deleteCar(params.id);
+    const { id } = context.params;
+    const result = await deleteCar(id);
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
