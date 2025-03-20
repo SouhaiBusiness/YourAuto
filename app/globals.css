@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+ 
+ 
+.blendmode{
+    background-blend-mode: darken;
+}
+ 
+/* Custom styles for the mobile menu */
+.mobile-menu {
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .mobile-menu.open {
+    display: block;
+  }
+  
+  .mobile-menu.closed {
+    display: none;
+  }
+
+
+
+  .custom-user-button {
+    margin-top: 2px;
+    width: 45px; /* Adjust the width */
+    height: 45px; /* Adjust the height */
+  }
+
+
+
+
+   
+  .home-img{
+    transition: 1s ease;
+    opacity: 0;
+    animation: car 1s ease forwards;	
+    animation-delay: 1.8s;
+  }
+
+  .slideRight h2{
+  animation: slideRight 1s ease forwards;
+  }
+  .slideRight h1{
+    animation: slideRight 1.5s ease forwards;
+  }
+  .slideRight button{
+    animation: slideRight 1.9s ease forwards;
+  }
+  
+
+  @keyframes slideRight{
+    0%{
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    100%{
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes car{
+    0%{
+      transform:  scale(0) ;
+      opacity: 0; 
+    }
+    100%{
+      transform:  scale(1) ;
+      opacity: 1;
+    }
+  }
