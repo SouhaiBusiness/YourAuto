@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { deleteCar, getCarById, updateCar } from "@/lib/db";
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, context: { params?: { id?: string } }) {
   try {
-    const car = await getCarById(params.id);
+    if (!context.params?.id) {
+      return NextResponse.json({ error: "Missing car ID" }, { status: 400 });
+    }
+
+    const car = await getCarById(context.params.id);
 
     if (!car) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
@@ -16,8 +20,12 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
   }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, context: { params?: { id?: string } }) {
   try {
+    if (!context.params?.id) {
+      return NextResponse.json({ error: "Missing car ID" }, { status: 400 });
+    }
+
     const data = await req.json();
 
     const car = {
@@ -28,12 +36,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       seats: Number.parseInt(data.seats),
       carAvg: Number.parseFloat(data.carAvg),
       image: {
-        url: data.imageUrl, // Base64 string
+        url: data.imageUrl,
       },
       updatedAt: new Date(),
     };
 
-    const result = await updateCar(params.id, car);
+    const result = await updateCar(context.params.id, car);
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
@@ -41,7 +49,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
     return NextResponse.json({
       success: true,
-      car: { ...car, id: params.id },
+      car: { ...car, id: context.params.id },
     });
   } catch (error) {
     console.error("Error updating car:", error);
@@ -49,9 +57,13 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, context: { params?: { id?: string } }) {
   try {
-    const result = await deleteCar(params.id);
+    if (!context.params?.id) {
+      return NextResponse.json({ error: "Missing car ID" }, { status: 400 });
+    }
+
+    const result = await deleteCar(context.params.id);
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
