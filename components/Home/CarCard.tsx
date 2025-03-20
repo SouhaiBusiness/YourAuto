@@ -24,7 +24,7 @@ const CarCard = (props: any) => {
   }
 
   return (
-    <div className="group bg-gray-100 p-2 sm:p-5 hover:bg-white hover:border-[1px] duration-500 cursor-pointer border-blue-500 rounded-3xl m-1 sm:m-5">
+    <div className="group bg-gray-100 p-2 sm:p-5 hover:bg-white hover:border-[1px] duration-500 cursor-pointer border-orange-500 rounded-3xl m-1 sm:m-5">
       <h2 className="text-[20px] font-medium mb-2">{car.name}</h2>
       <h2 className="text-[28px] font-bold mb-2">
         {car.price}
@@ -66,11 +66,11 @@ const CarCard = (props: any) => {
       </div>
 
       <button
-        className="hidden group-hover:flex bg-gradient-to-r from-blue-400 to-blue-500 p-2 rounded-lg
+        className="hidden group-hover:flex bg-gradient-to-r from-orange-400 to-orange-500 p-2 rounded-lg
        text-white w-full px-5 justify-between"
       >
         Rent Now
-        <span className="bg-blue-400 p-1 rounded-md">
+        <span className="bg-orange-400 p-1 rounded-md">
           <svg
             width="100"
             height="50"
