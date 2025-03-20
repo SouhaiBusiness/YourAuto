@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface CreativeCarouselProps {
   images: {
