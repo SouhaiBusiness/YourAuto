@@ -1,7 +1,8 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import { deleteCar, getCarById, updateCar } from "@/lib/db"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+// Using the correct parameter structure for dynamic routes
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const car = await getCarById(params.id)
 
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const data = await request.json()
 
@@ -50,7 +51,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
     const result = await deleteCar(params.id)
 

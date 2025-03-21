@@ -1,7 +1,7 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import { createBooking, getBookings } from "@/lib/db"
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const bookings = await getBookings()
     return NextResponse.json({ bookings })
@@ -10,7 +10,7 @@ export async function GET() {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
     const data = await request.json()
 
