@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 import { deleteCar, getCarById, updateCar } from "@/lib/db"
 
-// Using the correct parameter structure for dynamic routes
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+// Using a different approach for typing params
+export async function GET(request: NextRequest, context: { params: { id: string } }) {
   try {
-    const car = await getCarById(params.id)
+    const car = await getCarById(context.params.id)
 
     if (!car) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 })
@@ -17,7 +17,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, context: { params: { id: string } }) {
   try {
     const data = await request.json()
 
@@ -35,7 +35,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       updatedAt: new Date(),
     }
 
-    const result = await updateCar(params.id, car)
+    const result = await updateCar(context.params.id, car)
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 })
@@ -43,7 +43,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
     return NextResponse.json({
       success: true,
-      car: { ...car, id: params.id },
+      car: { ...car, id: context.params.id },
     })
   } catch (error) {
     console.error("Error updating car:", error)
@@ -51,9 +51,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
   try {
-    const result = await deleteCar(params.id)
+    const result = await deleteCar(context.params.id)
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 })
