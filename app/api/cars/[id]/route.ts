@@ -1,7 +1,8 @@
-import { NextResponse, type RouteContext } from "next/server";
+import { NextResponse } from "next/server";
 import { deleteCar, getCarById, updateCar } from "@/lib/db";
 
-export async function GET(req: Request, context: RouteContext<{ params: { id: string } }>) {
+// ✅ Ensure `context` is correctly typed
+export async function GET(req: Request, context: { params: { id: string } }) {
   try {
     const id = context.params.id;
 
@@ -22,7 +23,7 @@ export async function GET(req: Request, context: RouteContext<{ params: { id: st
   }
 }
 
-export async function PUT(req: Request, context: RouteContext<{ params: { id: string } }>) {
+export async function PUT(req: Request, context: { params: { id: string } }) {
   try {
     const id = context.params.id;
 
@@ -56,7 +57,7 @@ export async function PUT(req: Request, context: RouteContext<{ params: { id: st
   }
 }
 
-export async function DELETE(req: Request, context: RouteContext<{ params: { id: string } }>) {
+export async function DELETE(req: Request, context: { params: { id: string } }) {
   try {
     const id = context.params.id;
 
