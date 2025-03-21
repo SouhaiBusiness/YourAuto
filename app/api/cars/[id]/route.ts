@@ -1,13 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type RouteContext } from "next/server";
 import { deleteCar, getCarById, updateCar } from "@/lib/db";
 
-export async function GET(req: Request, context: { params?: { id?: string } }) {
+export async function GET(req: Request, context: RouteContext<{ params: { id: string } }>) {
   try {
-    if (!context.params?.id) {
+    const id = context.params.id;
+
+    if (!id) {
       return NextResponse.json({ error: "Missing car ID" }, { status: 400 });
     }
 
-    const car = await getCarById(context.params.id);
+    const car = await getCarById(id);
 
     if (!car) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
@@ -20,9 +22,11 @@ export async function GET(req: Request, context: { params?: { id?: string } }) {
   }
 }
 
-export async function PUT(req: Request, context: { params?: { id?: string } }) {
+export async function PUT(req: Request, context: RouteContext<{ params: { id: string } }>) {
   try {
-    if (!context.params?.id) {
+    const id = context.params.id;
+
+    if (!id) {
       return NextResponse.json({ error: "Missing car ID" }, { status: 400 });
     }
 
@@ -35,35 +39,32 @@ export async function PUT(req: Request, context: { params?: { id?: string } }) {
       carType: data.carType,
       seats: Number.parseInt(data.seats),
       carAvg: Number.parseFloat(data.carAvg),
-      image: {
-        url: data.imageUrl,
-      },
+      image: { url: data.imageUrl },
       updatedAt: new Date(),
     };
 
-    const result = await updateCar(context.params.id, car);
+    const result = await updateCar(id, car);
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
     }
 
-    return NextResponse.json({
-      success: true,
-      car: { ...car, id: context.params.id },
-    });
+    return NextResponse.json({ success: true, car: { ...car, id } });
   } catch (error) {
     console.error("Error updating car:", error);
     return NextResponse.json({ error: "Failed to update car" }, { status: 500 });
   }
 }
 
-export async function DELETE(req: Request, context: { params?: { id?: string } }) {
+export async function DELETE(req: Request, context: RouteContext<{ params: { id: string } }>) {
   try {
-    if (!context.params?.id) {
+    const id = context.params.id;
+
+    if (!id) {
       return NextResponse.json({ error: "Missing car ID" }, { status: 400 });
     }
 
-    const result = await deleteCar(context.params.id);
+    const result = await deleteCar(id);
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Car not found" }, { status: 404 });
