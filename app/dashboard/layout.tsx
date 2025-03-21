@@ -1,9 +1,16 @@
 "use client"
 
 import type React from "react"
-
+import type { Metadata } from 'next';
 import Link from "next/link"
 import { Car, CalendarDays } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: 'YourAuto | dashboard',
+  description: 'Add, edit, delete and manage booked cars',
+  icons: "/Mercedes.png", 
+};
+
 
 export default function DashboardLayout({
   children,
