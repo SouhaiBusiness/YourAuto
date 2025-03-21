@@ -17,7 +17,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [totalPages, setTotalPages] = useState<number>(1)
-  const [limit] = useState<number>(6) // Number of cars per page
+  const [limit] = useState<number>(8) // Number of cars per page
 
   useEffect(() => {
     getCarList_()
