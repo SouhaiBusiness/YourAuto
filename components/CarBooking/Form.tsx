@@ -148,7 +148,7 @@ const Form = ({car}:any) => {
         <form method='dialog'>
           {/* if there is a button, it will close the modal */}
           <button className='btn rounded-[20px] mr-4'>Close</button>
-          <button className='btn bg-blue-500 text-white hover:bg-blue-800 duration-1000 rounded-[20px]' onClick={handleSubmit}>
+          <button className='btn bg-orange-500 text-white hover:bg-orange-800 duration-1000 rounded-[20px]' onClick={handleSubmit}>
             Save
           </button>
         </form>
