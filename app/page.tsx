@@ -54,12 +54,15 @@ export default function Home() {
   }
 
   const orderCarList = (order: string) => {
-    if (!carsOrgList || carsOrgList.length === 0) return
+    if (!carsOrgList || carsOrgList.length === 0) return;
+  
+    const orderValue = Number(order); // Convert string to number
+    const sortedData = [...carsOrgList].sort((a, b) => (orderValue === -1 ? a.price - b.price : b.price - a.price));
+  
+    setCarsList(sortedData);
+  };
 
-    const sortedData = [...carsOrgList].sort((a, b) => (order == -1 ? a.price - b.price : b.price - a.price))
-    setCarsList(sortedData)
-  }
-
+  
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
     window.scrollTo({ top: 0, behavior: "smooth" })
