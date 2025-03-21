@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server"
 import { deleteCar, getCarById, updateCar } from "@/lib/db"
 
-export async function GET(request: Request, context: { params: { id: string } }) {
-  const id = context.params.id
+// Using a simpler approach for Next.js 15
+export async function GET(request: Request, { params }: any) {
+  const id = params.id
   try {
     const car = await getCarById(id)
 
@@ -17,8 +18,8 @@ export async function GET(request: Request, context: { params: { id: string } })
   }
 }
 
-export async function PUT(request: Request, context: { params: { id: string } }) {
-  const id = context.params.id
+export async function PUT(request: Request, { params }: any) {
+  const id = params.id
   try {
     const data = await request.json()
 
@@ -52,8 +53,8 @@ export async function PUT(request: Request, context: { params: { id: string } })
   }
 }
 
-export async function DELETE(request: Request, context: { params: { id: string } }) {
-  const id = context.params.id
+export async function DELETE(request: Request, { params }: any) {
+  const id = params.id
   try {
     const result = await deleteCar(id)
 
