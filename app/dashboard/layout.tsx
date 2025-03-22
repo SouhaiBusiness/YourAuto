@@ -8,7 +8,7 @@ import { Car, CalendarDays } from "lucide-react"
 export const metadata: Metadata = {
   title: 'YourAuto | dashboard',
   description: 'Add, edit, delete and manage booked cars',
-  icons: "/favicon.png", 
+  icons: "/favicon.ico", 
 };
 
 
