@@ -99,9 +99,9 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[
-              { name: "John Smith", role: "Founder & CEO", image: "/CEO.jpg?height=150&width=150" },
-              { name: "Sarah Johnson", role: "Operations Manager", image: "/operationsmanager.jpg?height=150&width=150" },
-              { name: "Michael Brown", role: "Fleet Manager", image: "/fleetmanager.jpg?height=150&width=150" },
+              { name: "Alae Dahbi", role: "Founder & CEO", image: "/CEO.jpg?height=150&width=150" },
+              { name: "Sarah Doulmi", role: "Operations Manager", image: "/operationsmanager.jpg?height=150&width=150" },
+              { name: "Anas Daki", role: "Fleet Manager", image: "/fleetmanager.jpg?height=150&width=150" },
             ].map((member, index) => (
               <div key={index} className="text-center">
                 <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 relative">
