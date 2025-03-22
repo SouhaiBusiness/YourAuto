@@ -11,7 +11,7 @@ const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 export const metadata: Metadata = {
   title: 'YourAuto',
   description: 'Rent your dream car effortlessly. Affordable rates, top brands, and smooth bookings!',
-  icons: "/favicon.png", 
+  icons: "/favicon.ico", 
 };
 
 export default function RootLayout({
