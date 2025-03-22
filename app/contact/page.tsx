@@ -293,7 +293,7 @@ export default function ContactPage() {
         <div className="h-[400px] bg-gray-200 rounded-xl overflow-hidden">
           {/* Replace with actual map implementation */}
           <div className="w-full h-full flex items-center justify-center bg-gray-300">
-            <p className="text-gray-600">Map placeholder - Integrate Google Maps or other map service here</p>
+            <p className="text-gray-600">Map placeholder - Google Maps </p>
           </div>
         </div>
       </div>
