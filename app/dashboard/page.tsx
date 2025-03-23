@@ -435,7 +435,7 @@ export default function CarManagement() {
                       <tr key={car._id} className="border-b hover:bg-gray-50">
                         <td className="py-3 px-4">
                           {car.image?.url ? (
-                            <Image
+                            <img
                               src={car.image.url || "/placeholder.svg"}
                               alt={car.name}
                               className="w-16 h-12 object-contain"
